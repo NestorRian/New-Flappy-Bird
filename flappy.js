@@ -74,7 +74,7 @@ function Passaro(alturaJogo) {
     let voando = false
 
     this.elemento = novoElemento('img', 'passaro')
-    this.elemento.src = 'imgs/passaro.png'
+    this.elemento.src = 'assets/passaro.png'
 
     this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
     this.setY = y => this.elemento.style.bottom = `${y}px`
@@ -189,9 +189,17 @@ function FlappyBird() {
     mensagemGameOver.style.display = 'none'
     areaDoJogo.appendChild(mensagemGameOver)
 
+    // Adicionando música ao jogo
+    const musica = new Audio('assets/msc-jogo.mp3')
+    musica.loop = true // Reproduzir em loop
+    musica.volume = 0.5 // Define o volume (0.0 a 1.0)
+
     let temporizador = null
 
     this.start = () => {
+
+        musica.play()  // Inicia a música quando o jogo começar
+
         // loop do jogo
         temporizador = setInterval(() => {
             barreiras.animar()
@@ -199,7 +207,8 @@ function FlappyBird() {
 
             if (colidiu(passaro, barreiras)) {
                 clearInterval(temporizador)
-                 mensagemGameOver.style.display = 'block'
+                musica.pause()  // Para a música quando o jogo acaba
+                mensagemGameOver.style.display = 'block'
                 botaoReiniciar.style.display = 'block'
             }
         }, 20)
