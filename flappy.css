@@ -10,11 +10,12 @@
 [wm-flappy] {
     position: relative;
     border: 5px solid dodgerblue;
-    height: 700px;
-    width: 1200px;
     margin: 15px;
     background-color: deepskyblue;
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: #70c5ce;
 }
 
 .passaro{
