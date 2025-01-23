@@ -1,5 +1,0 @@
-[[redirects]]
-from = "http:*"
-to = "https://new-flappy-bird.netlify.com/:splat"
-status = 301
-force = true
