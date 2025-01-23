@@ -167,6 +167,9 @@ function FlappyBird() {
 
     const botaoReiniciar = document.createElement('button')
     botaoReiniciar.innerHTML = 'Reiniciar'
+    botaoReiniciar.addEventListener('touchstart', () => {
+        location.reload();
+    });    
     botaoReiniciar.style.position = 'absolute'
     botaoReiniciar.style.top = '50%'
     botaoReiniciar.style.background = '#639301'
