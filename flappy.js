@@ -169,7 +169,7 @@ function FlappyBird() {
     botaoReiniciar.innerHTML = 'Reiniciar'
     botaoReiniciar.ontouchstart = () => {
         location.reload();
-    };
+    }
     botaoReiniciar.style.position = 'absolute'
     botaoReiniciar.style.top = '50%'
     botaoReiniciar.style.background = '#639301'

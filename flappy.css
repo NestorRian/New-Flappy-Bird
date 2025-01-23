@@ -62,3 +62,29 @@
     font-size: 70px;
     z-index: 100;
 }
+
+@media (max-width: 600px) {
+    [wm-flappy] {
+        width: 100%; /* Adapta à largura da tela */
+        height: 80vh; /* Ocupa 80% da altura da tela */
+        border: none; /* Remover borda para visualização melhor em telas menores */
+    }
+
+    .passaro {
+        width: 40px; /* Reduz tamanho do pássaro para telas menores */
+        height: auto;
+    }
+
+    .barreira {
+        width: 50px; /* Ajusta largura das barreiras */
+    }
+
+    .progresso {
+        font-size: 20px; /* Ajusta tamanho da pontuação */
+    }
+
+    button {
+        font-size: 16px; /* Ajusta tamanho do botão reiniciar */
+        padding: 10px 20px;
+    }
+}
