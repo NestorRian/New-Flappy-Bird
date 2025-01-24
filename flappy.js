@@ -153,6 +153,7 @@ function FlappyBird() {
     const areaDoJogo = document.querySelector('[wm-flappy]')
     const altura = areaDoJogo.clientHeight
     const largura = areaDoJogo.clientWidth
+    
 
     const progresso = new Progresso()
     const barreiras = new Barreiras(altura, largura, 210, 400,
@@ -164,6 +165,7 @@ function FlappyBird() {
     areaDoJogo.appendChild(progresso.elemento)
     areaDoJogo.appendChild(passaro.elemento)
     barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
+    
 
     const botaoReiniciar = document.createElement('button')
     botaoReiniciar.innerHTML = 'Reiniciar'
@@ -194,6 +196,7 @@ function FlappyBird() {
     mensagemGameOver.style.fontWeight = 'bold'
     mensagemGameOver.style.display = 'none'
     areaDoJogo.appendChild(mensagemGameOver)
+
 
     // Adicionando música ao jogo
     const musica = new Audio('assets/msc-jogo.mp3')
