@@ -103,6 +103,11 @@ function ParDeBarreiras(altura, abertura, x) {
 
 
 function Passaro(alturaJogo) {
+    document.addEventListener('touchstart', function (event) {
+        event.preventDefault();
+    }, { passive: false });
+
+
     let voando = false
 
     this.elemento = novoElemento('img', 'passaro')
@@ -117,6 +122,18 @@ function Passaro(alturaJogo) {
     window.addEventListener('pointerdown', () => voando = true);
     window.addEventListener('pointerup', () => voando = false);
 
+    let podeVoar = true;
+    const tempoEntreToques = 150; // Tempo mínimo entre toques (150ms)
+
+    window.addEventListener('pointerdown', () => {
+        if (podeVoar) {
+            voando = true;
+            podeVoar = false;
+            setTimeout(() => podeVoar = true, tempoEntreToques);
+        }
+    });
+
+    window.addEventListener('pointerup', () => voando = false);
 
 
     this.animar = () => {
