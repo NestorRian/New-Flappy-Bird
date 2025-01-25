@@ -7,16 +7,36 @@
     src: url('./assets/Pixel.ttf');
 }
 
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    touch-action: none;
+}
+
+h1 {
+    font-family: 'Pixel', sans-serif;
+    font-size: 50px;
+    color: #ffff;
+    margin-top: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+
 [wm-flappy] {
     position: relative;
     border: 5px solid dodgerblue;
-    margin: 15px;
+    margin: auto;
     background-color: deepskyblue;
     overflow: hidden;
+    max-width: 600px;
+    max-height: 800px;
     width: 100vw;
-    height: 100vh;
+    height: 80vh; /* Ajusta a altura para não sobrepor o título */
     background-color: #70c5ce;
 }
+
 
 .passaro{
     position: absolute;
@@ -63,3 +83,50 @@
     z-index: 100;
 }
 
+.mensagem-game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: red;
+    font-weight: bold;
+    font-family: 'Pixel', sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    display: none;
+    z-index: 1000; /* Garante que fique na frente dos outros elementos */
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px; /* Reduz o tamanho do título para telas menores */
+    }
+
+    .passaro {
+        width: 40px;
+        left: calc(50% - 20px);
+    }
+    .barreira .borda, 
+    .barreira .corpo {
+        width: 80px;
+    }
+    .progresso {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .passaro {
+        width: 30px;
+        left: calc(50% - 15px);
+    }
+    .barreira .borda, 
+    .barreira .corpo {
+        width: 60px;
+    }
+    .progresso {
+        font-size: 40px;
+    }
+}

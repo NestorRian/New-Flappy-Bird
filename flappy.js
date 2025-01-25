@@ -45,6 +45,8 @@ function ParDeBarreiras(altura, abertura, x) {
 // document.querySelector('[wm-flappy]').appendChild(b.elemento)
 
 function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
+    const deslocamentoBase = largura > 768 ? 3 : 2  // Velocidade menor para telas menores
+
     this.pares = [
         new ParDeBarreiras(altura, abertura, largura),
         new ParDeBarreiras(altura, abertura, largura + espaco),
@@ -52,10 +54,9 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
         new ParDeBarreiras(altura, abertura, largura + espaco * 3)
     ]
 
-    const deslocamento = 3
     this.animar = () => {
         this.pares.forEach(par => {
-            par.setX(par.getX() - deslocamento)
+            par.setX(par.getX() - deslocamentoBase)
 
             // quando elemento sair da area do jogo 
             if (par.getX() < -par.getLargura()) {
@@ -64,11 +65,42 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
             }
 
             const meio = largura / 2
-            const cruzouOMeio = par.getX() + deslocamento >= meio && par.getX() < meio
+            const cruzouOMeio = par.getX() + deslocamentoBase >= meio && par.getX() < meio
             if (cruzouOMeio) notificarPonto()
         })
     }
 }
+
+function ParDeBarreiras(altura, abertura, x) {
+    this.elemento = novoElemento('div', 'par-de-barreiras')
+
+    this.superior = new Barreira(true)
+    this.inferior = new Barreira(false)
+
+    this.elemento.appendChild(this.superior.elemento)
+    this.elemento.appendChild(this.inferior.elemento)
+
+    this.sortearAbertura = () => {
+        const aberturaMinima = 150  // Define uma abertura mínima para telas menores
+        const aberturaMaxima = 250  // Define uma abertura máxima para telas maiores
+
+        const aberturaAtual = Math.max(aberturaMinima, Math.min(abertura, aberturaMaxima))
+
+        const alturaSuperior = Math.random() * (altura - aberturaAtual)
+        const alturaInferior = altura - aberturaAtual - alturaSuperior
+
+        this.superior.setAltura(alturaSuperior)
+        this.inferior.setAltura(alturaInferior)
+    }
+
+    this.getX = () => parseInt(this.elemento.style.left.split('px')[0])
+    this.setX = x => this.elemento.style.left = `${x}px`
+    this.getLargura = () => this.elemento.clientWidth
+
+    this.sortearAbertura()
+    this.setX(x)
+}
+
 
 function Passaro(alturaJogo) {
     let voando = false
@@ -146,6 +178,17 @@ function colidiu(passaro, barreiras) {
     return colidiu
 }
 
+function ajustarDimensoes() {
+    const areaDoJogo = document.querySelector('[wm-flappy]')
+    areaDoJogo.style.width = `${window.innerWidth}px`
+    areaDoJogo.style.height = `${window.innerHeight}px`
+}
+
+// Chama a função ao carregar e redimensionar
+window.onload = ajustarDimensoes;
+window.onresize = ajustarDimensoes;
+
+
 
 function FlappyBird() {
     let pontos = 0
@@ -153,7 +196,7 @@ function FlappyBird() {
     const areaDoJogo = document.querySelector('[wm-flappy]')
     const altura = areaDoJogo.clientHeight
     const largura = areaDoJogo.clientWidth
-    
+
 
     const progresso = new Progresso()
     const barreiras = new Barreiras(altura, largura, 210, 400,
@@ -165,7 +208,7 @@ function FlappyBird() {
     areaDoJogo.appendChild(progresso.elemento)
     areaDoJogo.appendChild(passaro.elemento)
     barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
-    
+
 
     const botaoReiniciar = document.createElement('button')
     botaoReiniciar.innerHTML = 'Reiniciar'
@@ -195,6 +238,8 @@ function FlappyBird() {
     mensagemGameOver.style.color = 'red'
     mensagemGameOver.style.fontWeight = 'bold'
     mensagemGameOver.style.display = 'none'
+    mensagemGameOver.className = 'mensagem-game-over';
+    document.querySelector('[wm-flappy]').appendChild(mensagemGameOver);
     areaDoJogo.appendChild(mensagemGameOver)
 
 
@@ -202,6 +247,8 @@ function FlappyBird() {
     const musica = new Audio('assets/msc-jogo.mp3')
     musica.loop = true // Reproduzir em loop
     musica.volume = 0.5 // Define o volume (0.0 a 1.0)
+
+    
 
     let temporizador = null
 
