@@ -111,10 +111,12 @@ function Passaro(alturaJogo) {
     this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
     this.setY = y => this.elemento.style.bottom = `${y}px`
 
-    window.onkeydown = e => voando = true
-    window.onkeyup = e => voando = false
-    window.ontouchstart = e => voando = true
-    window.ontouchend = e => voando = false
+    window.addEventListener('keydown', () => voando = true);
+    window.addEventListener('keyup', () => voando = false);
+
+    window.addEventListener('pointerdown', () => voando = true);
+    window.addEventListener('pointerup', () => voando = false);
+
 
 
     this.animar = () => {
@@ -248,7 +250,7 @@ function FlappyBird() {
     musica.loop = true // Reproduzir em loop
     musica.volume = 0.5 // Define o volume (0.0 a 1.0)
 
-    
+
 
     let temporizador = null
 
