@@ -5,7 +5,7 @@ Um simples clone do famoso jogo **Flappy Bird**, desenvolvido em **HTML, CSS e J
 ## 📸 ![img-flappy](https://github.com/user-attachments/assets/7b24f94f-9b81-462c-a527-ce77a3f509e2)
 
 
-
+Link para acessar: https://nestorrian.github.io/New-Flappy-Bird/
 ## 🚀 Funcionalidades
 
 - ✅ Gráficos simples e divertidos
